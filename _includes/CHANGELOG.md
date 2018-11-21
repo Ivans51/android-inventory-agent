@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0-rc.6"></a>
+# [1.0.0-rc.6](https://github.com/flyve-mdm/android-inventory-agent/compare/1.0.0-rc.5...1.0.0-rc.6) (2018-11-21)
+
+
+
 <a name="1.0.0-rc.5"></a>
 # [1.0.0-rc.5](https://github.com/flyve-mdm/android-inventory-agent/compare/1.0.0-rc.4...1.0.0-rc.5) (2018-11-21)
 
