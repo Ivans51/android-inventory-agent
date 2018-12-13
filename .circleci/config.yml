@@ -181,6 +181,34 @@ jobs:
       - run:
           name: Generate Documentation
           command: source ci/scripts/create_documentation.sh
+  screenshot_api_16:
+    <<: *android_config
+    steps:
+      - checkout
+      - *validate_running
+      - *restore_gradle_cache
+#      - run:
+#          name: Setup environment
+#          command: source ci/scripts/setup_environment.sh
+      - run:
+          name: Update about information
+          command: source ci/scripts/create_about_data.sh
+      - run:
+          name: Setup screenshots
+          command: source ci/scripts/setup_screenshots.sh
+      - run:
+          name: Mode screenshot
+          command: source ci/scripts/mode_screenshots.sh
+      - run:
+          name: Run Fastlane Screengrab
+          command: fastlane screengrab
+      - run:
+          name: send screenshot to gh-pages
+          command: source ci/scripts/ci_push_screenshot.sh
+      - store_artifacts:
+          path: fastlane/metadata
+          destination: screenshot
+      - *save_gradle_cache
 
 workflows:
   version: 2
@@ -212,7 +240,7 @@ workflows:
           filters:
             branches:
               only:
-                - develop
+                - master
       - deploy_production:
           context: org-global
           requires:
@@ -221,6 +249,13 @@ workflows:
             branches:
               only:
                 - master
+      - screenshot_api_16:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - develop
       - documentation:
           context: org-global
           requires:
